@@ -1,0 +1,2 @@
+class MiddlewareEntity < ApplicationRecord
+end
