@@ -26,6 +26,11 @@ class Entity
     klass.new(object.metadata)
   end
 
+  def self.attribute(name)
+    define_method(name) { @metadata[name] }
+    define_method("#{name}=") { |value| @metadata[name] = value }
+  end
+
   def initialize(metadata)
     @metadata = metadata
   end

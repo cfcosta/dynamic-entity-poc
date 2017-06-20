@@ -10,6 +10,8 @@ gem 'rails', github: 'rails/rails'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 
+gem 'multi_json'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
