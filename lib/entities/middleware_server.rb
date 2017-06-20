@@ -1,4 +1,4 @@
-require_relative 'entity'
+require_relative '../entity'
 
 class MiddlewareServer < Entity
   register self

@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'middleware_server'
+require 'entities/middleware_server'
 
 describe MiddlewareServer do
   describe '.applicable?' do
