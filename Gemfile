@@ -28,6 +28,7 @@ group :development, :test do
   gem 'rspec-given', '~> 3.8'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'guard-rspec', require: false
+  gem 'json-schema-rspec'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
