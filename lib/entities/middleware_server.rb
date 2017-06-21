@@ -6,6 +6,6 @@ class MiddlewareServer < Entity
   attribute :name
 
   def self.applicable?(data)
-    data[:server_status] == 'online'
+    data[:klass] == 'MiddlewareServer'
   end
 end

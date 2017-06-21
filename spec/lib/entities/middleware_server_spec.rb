@@ -3,13 +3,15 @@ require 'entities/middleware_server'
 
 describe MiddlewareServer do
   describe '.applicable?' do
-    context 'is true if server is online' do
-      Given(:metadata) { { server_status: 'online' } }
+    context 'is true for a middleware server' do
+      Given(:metadata) { { klass: 'MiddlewareServer' } }
+
       Then { MiddlewareServer.applicable?(metadata) == true }
     end
 
-    context 'is false if server is offline' do
-      Given(:metadata) { { server_status: 'offline' } }
+    context 'is false for other entities' do
+      Given(:metadata) { { klass: 'Datasource' } }
+
       Then { MiddlewareServer.applicable?(metadata) == false }
     end
   end
