@@ -1,0 +1,5 @@
+{
+    "klass": "MiddlewareServer",
+    "name": "Wildfly Server Example",
+    "resource_type_path": "/t;hawkular/f;c5be0849abea/rt;WildFly%20Server"
+}
