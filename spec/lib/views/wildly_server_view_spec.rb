@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'views/wildfly_server_view'
 
 RSpec.describe WildflyServerView do
-  Given(:data) { { name: 'foo' } }
+  Given(:data) { WildflyServer.new(name: 'foo') }
   Given(:view) { WildflyServerView.new(data) }
 
   describe '#render_json' do

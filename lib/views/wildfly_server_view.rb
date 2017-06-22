@@ -1,5 +1,5 @@
 require_relative '../view'
-require_relative '../entity'
+require_relative '../entities/wildfly_server'
 
 class WildflyServerView < View
   field :name
