@@ -2,27 +2,28 @@ module ViewDSL
   class Pane
     attr_reader :name, :fields
 
-    def initialize(name)
+    def initialize(name, &block)
       @name = name
       @fields = []
-    end
 
-    def pane(name, &block)
-      new_pane = self.class.new(name).tap { |p| p.instance_exec(&block) }
-      fields << new_pane
+      instance_exec(&block) if block
     end
 
     def field(name)
       fields << name
     end
-  end
 
-  def pane(name, &block)
-    fields << Pane.new(name).tap { |p| p.instance_exec(&block) }
+    def pane(name, &block)
+      field(self.class.new(name, &block))
+    end
   end
 
   def field(name)
     fields << name
+  end
+
+  def pane(name, &block)
+    field(Pane.new(name, &block))
   end
 
   def fields

@@ -28,7 +28,7 @@ RSpec.describe View do
     MultiJson.dump(val)
   end
 
-  describe '.render_json' do
+  describe '#render_json' do
     context 'empty entity' do
       Given(:view) { MockViews::Zero.new({}) }
       Then { view.render_json == '{}' }
