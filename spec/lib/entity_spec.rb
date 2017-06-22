@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'entity'
 
-class MockEntity
+class MockEntity < Entity
   attr_reader :data
 
   def self.applicable?(data)
@@ -26,6 +26,11 @@ describe Entity do
     Given(:entity) { Object.new }
     When { Entity.register(entity) }
     Then { Entity.registered_entities.include?(entity) }
+
+    context 'in subclass' do
+      When { MockEntity.register(entity) }
+      Then { Entity.registered_entities.include?(entity) }
+    end
   end
 
   describe 'constantize' do
