@@ -10,6 +10,7 @@ gem 'rails', github: 'rails/rails'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 
+gem 'hawkular-client'
 gem 'multi_json'
 
 group :development, :test do

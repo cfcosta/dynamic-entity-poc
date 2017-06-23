@@ -10,10 +10,12 @@ class View
     @data = data
   end
 
-  def render_json
-    result = self.class.fields.inject({}) { |h, f| h.merge render(f) }
+  def as_json(*args)
+    self.class.fields.inject({}) { |h, f| h.merge render(f) }
+  end
 
-    MultiJson.dump(result)
+  def render_json
+    MultiJson.dump(as_json)
   end
 
   def render_schema

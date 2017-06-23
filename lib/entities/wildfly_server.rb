@@ -4,9 +4,22 @@ require_relative 'middleware_server'
 class WildflyServer < MiddlewareServer
   register self
 
+  attribute :metrics
+
   # Returns if this entity is appliable for given metadata.
   def self.applicable?(data)
-    data[:klass] == 'MiddlewareServer' &&
-      data[:resource_type_path].include?(URI.escape('WildFly Server'))
+    data[:type_path].to_s.include?(URI.escape('WildFly Server'))
+  end
+
+  def bind_address
+    properties['Bound Address']
+  end
+
+  def product
+    properties['Product Name']
+  end
+
+  def version
+    properties['Version']
   end
 end

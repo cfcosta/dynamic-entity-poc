@@ -15,4 +15,11 @@ describe MiddlewareServer do
       Then { MiddlewareServer.applicable?(metadata) == false }
     end
   end
+
+  describe '#feed' do
+    Given(:type_path) { '/t;hawkular/f;37b3606f962e/rt;Platform_Operating%20System' }
+    Given(:server) { MiddlewareServer.new(type_path: type_path) }
+
+    Then { server.feed == '37b3606f962e' }
+  end
 end
