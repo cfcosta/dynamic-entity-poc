@@ -1,10 +1,18 @@
 require 'multi_json'
 require_relative 'view_dsl'
 
+ViewNotFound = Class.new(NameError)
+
 class View
   attr_reader :data
 
   extend ViewDSL
+
+  def self.for(klass)
+    const_get("#{klass}View")
+  rescue NameError => e
+    fail ViewNotFound, e
+  end
 
   def initialize(data)
     @data = data

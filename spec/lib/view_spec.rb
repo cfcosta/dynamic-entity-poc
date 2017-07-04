@@ -1,6 +1,9 @@
 require 'rails_helper'
 require 'view'
 
+class MockView < View
+end
+
 module MockViews
   class Zero < View
   end
@@ -47,6 +50,13 @@ end
 RSpec.describe View do
   def json!(val)
     MultiJson.dump(val)
+  end
+
+  describe '.for' do
+    Given(:klass) { 'Mock' }
+
+    Then { View.for(klass) == MockView }
+    Then { expect { View.for('foobar') }.to raise_error(ViewNotFound) }
   end
 
   describe '#render_json' do
