@@ -1,5 +1,15 @@
 {
-    "klass": "MiddlewareServer",
-    "name": "Wildfly Server Example",
-    "resource_type_path": "/t;hawkular/f;c5be0849abea/rt;WildFly%20Server"
+    "summary": {
+        "properties": {
+            "name": "Wildfly Server Example",
+            "hostname": "c5be0849abea",
+            "feed": "c5be0849abea",
+            "typePath": "/t;hawkular/f;c5be0849abea/rt;WildFly%20Server",
+            "hostname": "c5be0849abea",
+            "bindAddress": "127.0.0.1",
+            "product": "Hawkular",
+            "version": "1.0.0"
+        }
+    },
+    "metrics": []
 }

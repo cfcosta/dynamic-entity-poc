@@ -24,12 +24,12 @@ class View
   private def render(field)
     case field
     when Symbol
-      { field => data.public_send(field) }
+      { field.to_s.camelize(:lower).to_sym => data.public_send(field) }
     when ViewDSL::Pane
       rendered = field.fields
         .inject({}) { |h, f| h.merge(render(f)) }
 
-      { field.name => rendered }
+      { field.name.to_s.camelize(:lower).to_sym => rendered }
     end
   end
 end

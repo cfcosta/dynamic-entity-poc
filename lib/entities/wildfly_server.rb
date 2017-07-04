@@ -2,7 +2,7 @@ require_relative 'middleware_server'
 
 # A specialized version of MiddlewareServer for servers running WildFly.
 class WildflyServer < MiddlewareServer
-  register self
+  register self, weight: 100
 
   attribute :metrics
 

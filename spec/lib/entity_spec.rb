@@ -13,6 +13,12 @@ class MockEntity < Entity
   end
 end
 
+class HigherPriorityMockEntity < Entity
+  def self.applicable?(data)
+    true
+  end
+end
+
 describe Entity do
   describe '.applicable?' do
     Then 'raises error on base class' do
@@ -21,7 +27,7 @@ describe Entity do
   end
 
   describe '.register' do
-    after { Entity.registered_entities.delete(entity) }
+    after { Entity.unregister(entity) }
 
     Given(:entity) { Object.new }
     When { Entity.register(entity) }
@@ -34,28 +40,31 @@ describe Entity do
   end
 
   describe 'constantize' do
-    Given(:entity) { instance_double('MiddlewareEntity', klass: 'MockEntity', metadata: metadata) }
     Given(:metadata) { {foo: :bar} }
 
-    context 'raises error if not registered' do
-      Then { expect { Entity.constantize(entity)}.to raise_error Entity::UnknownClass }
+    after { Entity.unregister(MockEntity) }
+
+    When { Entity.register(MockEntity) }
+
+    context 'raises error if metadata do not comply to requirements' do
+      When { metadata.delete(:foo) }
+      Then { expect { Entity.constantize(metadata)}.to raise_error Entity::NoMatchedEntity }
     end
 
-    context 'registered' do
-      after { Entity.registered_entities.delete(MockEntity) }
-      When { Entity.register(MockEntity) }
+    context 'returns a new object' do
+      When(:result) { Entity.constantize(metadata) }
 
-      context 'raises error if metadata do not comply to requirements' do
-        When { metadata.delete(:foo) }
-        Then { expect { Entity.constantize(entity)}.to raise_error Entity::UnmatchedData }
-      end
+      Then { result.is_a? MockEntity }
+      And { result.data == metadata }
+    end
 
-      context 'returns a new object' do
-        When(:result) { Entity.constantize(entity) }
+    context 'sorts by weight' do
+      after { Entity.unregister(HigherPriorityMockEntity) }
+      before { Entity.register(HigherPriorityMockEntity, weight: 999) }
 
-        Then { result.is_a? MockEntity }
-        And { result.data == metadata }
-      end
+      When(:result) { Entity.constantize(metadata) }
+
+      Then { result.is_a? HigherPriorityMockEntity }
     end
   end
 end

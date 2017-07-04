@@ -11,6 +11,9 @@ class WildflyServerView < View
       field :product
       field :version
       field :metrics
+      field :type_path
     end
   end
+
+  field :metrics
 end

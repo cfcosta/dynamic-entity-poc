@@ -21,6 +21,10 @@ module MockViews
   class NestedPane < View
     pane(:foo) { pane(:bar) { field(:name) } }
   end
+
+  class AttributeTransformation < View
+    field :foo_bar
+  end
 end
 
 RSpec.describe View do
@@ -62,6 +66,14 @@ RSpec.describe View do
       Given(:object) { double(name: 'hello') }
       Given(:view) { MockViews::NestedPane.new(object) }
       Given(:result) { json!(foo: { bar: { name: 'hello' } }) }
+
+      Then { view.render_json == result }
+    end
+
+    context 'attribute name transformation' do
+      Given(:object) { double(foo_bar: 'hello') }
+      Given(:view) { MockViews::AttributeTransformation.new(object) }
+      Given(:result) { json!(fooBar: 'hello') }
 
       Then { view.render_json == result }
     end

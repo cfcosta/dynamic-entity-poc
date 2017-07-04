@@ -1,0 +1,207 @@
+
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "definitions": {},
+    "id": "http://example.com/example.json",
+    "properties": {
+        "$schema": {
+            "id": "/properties/$schema",
+            "type": "string"
+        },
+        "definitions": {
+            "id": "/properties/definitions",
+            "properties": {},
+            "type": "object"
+        },
+        "id": {
+            "id": "/properties/id",
+            "type": "string"
+        },
+        "properties": {
+            "id": "/properties/properties",
+            "properties": {
+                "metrics": {
+                    "id": "/properties/properties/properties/metrics",
+                    "properties": {
+                        "id": {
+                            "id": "/properties/properties/properties/metrics/properties/id",
+                            "type": "string"
+                        },
+                        "items": {
+                            "id": "/properties/properties/properties/metrics/properties/items",
+                            "properties": {},
+                            "type": "object"
+                        },
+                        "type": {
+                            "id": "/properties/properties/properties/metrics/properties/type",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "summary": {
+                    "id": "/properties/properties/properties/summary",
+                    "properties": {
+                        "id": {
+                            "id": "/properties/properties/properties/summary/properties/id",
+                            "type": "string"
+                        },
+                        "properties": {
+                            "id": "/properties/properties/properties/summary/properties/properties",
+                            "properties": {
+                                "properties": {
+                                    "id": "/properties/properties/properties/summary/properties/properties/properties/properties",
+                                    "properties": {
+                                        "id": {
+                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/id",
+                                            "type": "string"
+                                        },
+                                        "properties": {
+                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties",
+                                            "properties": {
+                                                "bindAddress": {
+                                                    "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/bindAddress",
+                                                    "properties": {
+                                                        "id": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/bindAddress/properties/id",
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/bindAddress/properties/type",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "feed": {
+                                                    "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/feed",
+                                                    "properties": {
+                                                        "id": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/feed/properties/id",
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/feed/properties/type",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "hostname": {
+                                                    "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/hostname",
+                                                    "properties": {
+                                                        "id": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/hostname/properties/id",
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/hostname/properties/type",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "metrics": {
+                                                    "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/metrics",
+                                                    "properties": {
+                                                        "id": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/metrics/properties/id",
+                                                            "type": "string"
+                                                        },
+                                                        "items": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/metrics/properties/items",
+                                                            "properties": {},
+                                                            "type": "object"
+                                                        },
+                                                        "type": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/metrics/properties/type",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "name": {
+                                                    "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/name",
+                                                    "properties": {
+                                                        "id": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/name/properties/id",
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/name/properties/type",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "product": {
+                                                    "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/product",
+                                                    "properties": {
+                                                        "id": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/product/properties/id",
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/product/properties/type",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "typePath": {
+                                                    "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/typePath",
+                                                    "properties": {
+                                                        "id": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/typePath/properties/id",
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/typePath/properties/type",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "version": {
+                                                    "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/version",
+                                                    "properties": {
+                                                        "id": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/version/properties/id",
+                                                            "type": "string"
+                                                        },
+                                                        "type": {
+                                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/properties/properties/version/properties/type",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": {
+                                            "id": "/properties/properties/properties/summary/properties/properties/properties/properties/properties/type",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": {
+                            "id": "/properties/properties/properties/summary/properties/type",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "type": {
+            "id": "/properties/type",
+            "type": "string"
+        }
+    },
+    "type": "object"
+}

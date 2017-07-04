@@ -3,17 +3,55 @@
     "definitions": {},
     "id": "http://example.com/example.json",
     "properties": {
-        "klass": {
-            "id": "/properties/klass",
-            "type": "string"
+        "metrics": {
+            "id": "/properties/metrics",
+            "items": {},
+            "type": "array"
         },
-        "name": {
-            "id": "/properties/name",
-            "type": "string"
-        },
-        "resource_type_path": {
-            "id": "/properties/resource_type_path",
-            "type": "string"
+        "summary": {
+            "id": "/properties/summary",
+            "properties": {
+                "properties": {
+                    "id": "/properties/summary/properties/properties",
+                    "properties": {
+                        "bindAddress": {
+                            "id": "/properties/summary/properties/properties/properties/bindAddress",
+                            "type": "string"
+                        },
+                        "feed": {
+                            "id": "/properties/summary/properties/properties/properties/feed",
+                            "type": "string"
+                        },
+                        "hostname": {
+                            "id": "/properties/summary/properties/properties/properties/hostname",
+                            "type": "string"
+                        },
+                        "metrics": {
+                            "id": "/properties/summary/properties/properties/properties/metrics",
+                            "items": {},
+                            "type": "array"
+                        },
+                        "name": {
+                            "id": "/properties/summary/properties/properties/properties/name",
+                            "type": "string"
+                        },
+                        "product": {
+                            "id": "/properties/summary/properties/properties/properties/product",
+                            "type": "string"
+                        },
+                        "typePath": {
+                            "id": "/properties/summary/properties/properties/properties/typePath",
+                            "type": "string"
+                        },
+                        "version": {
+                            "id": "/properties/summary/properties/properties/properties/version",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
         }
     },
     "type": "object"

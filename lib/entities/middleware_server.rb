@@ -1,7 +1,7 @@
 require_relative '../entity'
 
 class MiddlewareServer < Entity
-  register self
+  register self, weight: 10
 
   attribute :id
   attribute :name
