@@ -10,8 +10,17 @@ class View
     @data = data
   end
 
-  def as_json(*args)
-    self.class.fields.inject({}) { |h, f| h.merge render(f) }
+  def as_json(*)
+    superclass = self.class.superclass
+
+    data = if superclass.is_a?(ViewDSL)
+             superclass.new(@data).as_json
+           else
+             {}
+           end
+
+    self.class.fields
+      .inject(data) { |h, f| h.deep_merge render(f) }
   end
 
   def render_json
@@ -19,17 +28,24 @@ class View
   end
 
   def render_schema
+    raise NotImplementedError
   end
 
-  private def render(field)
+  private def render(row)
+    field, alias_name = row
+
     case field
     when Symbol
-      { field.to_s.camelize(:lower).to_sym => data.public_send(field) }
+      { normalize(alias_name) => data.public_send(alias_name) }
     when ViewDSL::Pane
       rendered = field.fields
-        .inject({}) { |h, f| h.merge(render(f)) }
+        .inject({}) { |h, f| h.deep_merge(render(f)) }
 
-      { field.name.to_s.camelize(:lower).to_sym => rendered }
+      { normalize(field.name) => rendered }
     end
+  end
+
+  private def normalize(name)
+    name.to_s.camelize(:lower).to_sym
   end
 end

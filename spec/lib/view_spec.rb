@@ -27,6 +27,18 @@ module MockViews
     field :baz
   end
 
+  class Subclassed < Simple
+    field :bar
+  end
+
+  class Alias < View
+    field :foo, :bar
+  end
+
+  class MessageChain < View
+    field 'bar.baz', :foo
+  end
+
   class AttributeTransformation < View
     field :foo_bar
   end
@@ -79,6 +91,22 @@ RSpec.describe View do
       Given(:object) { double(name: 'hello', baz: 'baz') }
       Given(:view) { MockViews::PaneAndField.new(object) }
       Given(:result) { json!(foo: { name: 'hello' }, baz: 'baz') }
+
+      Then { view.render_json == result }
+    end
+
+    context 'alias' do
+      Given(:object) { double(bar: :baz) }
+      Given(:view) { MockViews::Alias.new(object) }
+      Given(:result) { json!(bar: :baz) }
+
+      Then { view.render_json == result }
+    end
+
+    context 'subclassed' do
+      Given(:object) { double(name: 'hello', bar: 'bar') }
+      Given(:view) { MockViews::Subclassed.new(object) }
+      Given(:result) { json!(name: 'hello', bar: 'bar') }
 
       Then { view.render_json == result }
     end
