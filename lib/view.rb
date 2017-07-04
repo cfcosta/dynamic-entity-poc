@@ -8,8 +8,19 @@ class View
 
   extend ViewDSL
 
-  def self.for(klass)
-    const_get("#{klass}View")
+  def self.for(*classes)
+    views = classes.map do |klass|
+      view_class = const_get("#{klass}View") rescue nil
+
+      if view_class.nil?
+        obj_class = const_get(klass).superclass
+        view_class = self.for(obj_class.name) or fail ViewNotFound
+      end
+
+      view_class
+    end
+
+    classes.size == 1 ? views.first : views
   rescue NameError => e
     fail ViewNotFound, e
   end

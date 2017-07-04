@@ -1,8 +1,13 @@
 require 'rails_helper'
 require 'view'
+require 'entity'
 
-class MockView < View
-end
+MockView = Class.new(View)
+Mock = Class.new(Entity)
+Stub = Class.new(Mock)
+
+List = Class.new(Entity)
+ListView = Class.new(View)
 
 module MockViews
   class Zero < View
@@ -10,8 +15,7 @@ module MockViews
 
   class Simple < View
     field(:name)
-  end
-
+  end 
   class Simple2 < View
     field(:name)
     field(:description)
@@ -53,10 +57,25 @@ RSpec.describe View do
   end
 
   describe '.for' do
-    Given(:klass) { 'Mock' }
+    context 'same class' do
+      Given(:klass) { 'Mock' }
 
-    Then { View.for(klass) == MockView }
-    Then { expect { View.for('foobar') }.to raise_error(ViewNotFound) }
+      Then { View.for(klass) == MockView }
+      Then { expect { View.for('foobar') }.to raise_error(ViewNotFound) }
+    end
+
+    context 'superclasses' do
+      Given(:klass) { 'Stub' }
+
+      Then { View.for(klass) == MockView }
+    end
+
+    context 'list' do
+      Given(:list) { 'List' }
+      Given(:mock) { 'Mock' }
+
+      Then { View.for(list, mock) == [ListView, MockView] }
+    end
   end
 
   describe '#render_json' do
