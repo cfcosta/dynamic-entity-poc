@@ -15,7 +15,8 @@ module MockViews
 
   class Simple < View
     field(:name)
-  end 
+  end
+
   class Simple2 < View
     field(:name)
     field(:description)
