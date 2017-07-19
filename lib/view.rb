@@ -6,6 +6,7 @@ ViewNotFound = Class.new(NameError)
 
 class View
   attr_reader :data
+  alias entity data
 
   extend ViewDSL
   extend ViewImport
@@ -57,7 +58,13 @@ class View
 
     case field
     when Symbol, String
-      { normalize(alias_name) => data.public_send(field) }
+      result = if respond_to?(field)
+                 send(field)
+               else
+                 data.public_send(field)
+               end
+
+      { normalize(alias_name) => result }
     when ViewDSL::Pane
       rendered = field.fields
         .inject({}) { |h, f| h.deep_merge(render(f)) }

@@ -51,6 +51,14 @@ module MockViews
     field :foo_bar
   end
 
+  class AttributeDefinedOnView < View
+    field :foo
+    field :bar
+
+    def foo; :bar; end
+    def bar; entity.omg; end
+  end
+
   class FromYAML < View.from_yaml_file('spec/fixtures/view_import.yml')
   end
 
@@ -151,6 +159,14 @@ RSpec.describe View do
       Given(:object) { double(foo_bar: 'hello') }
       Given(:view) { MockViews::AttributeTransformation.new(object) }
       Given(:result) { json!(fooBar: 'hello') }
+
+      Then { view.render_json == result }
+    end
+
+    context 'attribute defined on view' do
+      Given(:object) { double(omg: 'omg') }
+      Given(:view) { MockViews::AttributeDefinedOnView.new(object) }
+      Given(:result) { json!(foo: 'bar', bar: 'omg') }
 
       Then { view.render_json == result }
     end
