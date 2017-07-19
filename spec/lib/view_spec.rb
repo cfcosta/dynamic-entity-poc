@@ -40,7 +40,7 @@ module MockViews
   end
 
   class Alias < View
-    field :foo, :bar
+    field :name, :full_name
   end
 
   class MessageChain < View
@@ -49,6 +49,12 @@ module MockViews
 
   class AttributeTransformation < View
     field :foo_bar
+  end
+
+  class FromYAML < View.from_yaml_file('spec/fixtures/view_import.yml')
+  end
+
+  class FromJSON < View.from_json_file('spec/fixtures/view_import.json')
   end
 end
 
@@ -126,9 +132,9 @@ RSpec.describe View do
     end
 
     context 'alias' do
-      Given(:object) { double(bar: :baz) }
+      Given(:object) { double(name: :baz) }
       Given(:view) { MockViews::Alias.new(object) }
-      Given(:result) { json!(bar: :baz) }
+      Given(:result) { json!(fullName: :baz) }
 
       Then { view.render_json == result }
     end
@@ -145,6 +151,22 @@ RSpec.describe View do
       Given(:object) { double(foo_bar: 'hello') }
       Given(:view) { MockViews::AttributeTransformation.new(object) }
       Given(:result) { json!(fooBar: 'hello') }
+
+      Then { view.render_json == result }
+    end
+
+    context 'yaml schema parsing' do
+      Given(:object) { double(id: 1, full_name: 'foo', active: true, foo: 'bar') }
+      Given(:view) { MockViews::FromYAML.new(object) }
+      Given(:result) { json!(summary: {id: 1, isActive: true, name: 'foo'}, foo: 'bar') }
+
+      Then { view.render_json == result }
+    end
+
+    context 'json schema parsing' do
+      Given(:object) { double(id: 1, full_name: 'foo', active: true, foo: 'bar') }
+      Given(:view) { MockViews::FromJSON.new(object) }
+      Given(:result) { json!(summary: {id: 1, isActive: true, name: 'foo'}, foo: 'bar') }
 
       Then { view.render_json == result }
     end

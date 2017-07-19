@@ -1,5 +1,6 @@
 require 'multi_json'
 require_relative 'view_dsl'
+require_relative 'view_import'
 
 ViewNotFound = Class.new(NameError)
 
@@ -7,6 +8,7 @@ class View
   attr_reader :data
 
   extend ViewDSL
+  extend ViewImport
 
   def self.for(*classes)
     views = classes.map do |klass|
@@ -54,8 +56,8 @@ class View
     field, alias_name = row
 
     case field
-    when Symbol
-      { normalize(alias_name) => data.public_send(alias_name) }
+    when Symbol, String
+      { normalize(alias_name) => data.public_send(field) }
     when ViewDSL::Pane
       rendered = field.fields
         .inject({}) { |h, f| h.deep_merge(render(f)) }

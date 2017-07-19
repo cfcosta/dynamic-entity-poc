@@ -1,0 +1,8 @@
+{
+        "summary": [
+                {"name": "id"},
+                {"name": "active", "alias": "is_active"},
+                {"name": "full_name", "alias": "name"}
+        ],
+        "foo": {"name": "foo"}
+}
