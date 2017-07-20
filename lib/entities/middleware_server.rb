@@ -1,19 +1,9 @@
-require_relative '../entity'
+require_dependency 'entities/middleware_resource'
 
-class MiddlewareServer < Entity
+class MiddlewareServer < MiddlewareResource
   register self, weight: 10
 
-  attribute :id
-  attribute :name
-  attribute :properties
-  attribute :type_path
-
-  def self.applicable?(data)
-    data[:klass] == 'MiddlewareServer'
+  def self.applicable?(_)
+    true
   end
-
-  def feed
-    @feed ||= type_path.match(/;([0-9a-zA-Z]+)\/rt/)[1]
-  end
-  alias hostname feed
 end

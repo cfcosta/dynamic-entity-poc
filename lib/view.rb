@@ -11,19 +11,22 @@ class View
   extend ViewDSL
   extend ViewImport
 
-  def self.for(*classes)
-    views = classes.map do |klass|
-      view_class = const_get("#{klass}View") rescue nil
-
-      if view_class.nil?
-        obj_class = const_get(klass).superclass
-        view_class = self.for(obj_class.name) or fail ViewNotFound
-      end
-
-      view_class
+  def self.for(*entities)
+    views = entities.flatten.map do |entity|
+      for_class(entity.class).new(entity)
     end
 
-    classes.size == 1 ? views.first : views
+    views.size == 1 ? views.first : views
+  end
+
+  def self.for_class(klass)
+    view_class = const_get("#{klass.name}View") rescue nil
+
+    if view_class.nil?
+      view_class = self.for_class(klass.superclass) or fail ViewNotFound
+    end
+
+    view_class
   rescue NameError => e
     fail ViewNotFound, e
   end

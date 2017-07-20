@@ -1,19 +1,12 @@
-require_relative '../view'
-require_relative '../entities/wildfly_server'
+require_dependency 'views/middleware_resource_view'
+require_dependency 'entities/wildfly_server'
 
-class WildflyServerView < View
+class WildflyServerView < MiddlewareResourceView
   pane :summary do
-    pane :properties do
-      field :name
-      field :hostname
-      field :feed
-      field :bind_address
-      field :product
-      field :version
-      field :metrics
-      field :type_path
-    end
+    field :bind_address
+    field :product
+    field :version
   end
 
-  field :metrics
+  field :properties
 end

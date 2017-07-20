@@ -26,7 +26,7 @@ class Entity
 
   def self.constantize(metadata)
     klass = registered_entities.find { |e| e.applicable?(metadata) }
-    raise NoMatchedEntity unless klass
+    raise NoMatchedEntity, metadata.inspect unless klass
 
     klass.new(metadata)
   end
