@@ -4,6 +4,6 @@ class MiddlewareServer < MiddlewareResource
   register self, weight: 10
 
   def self.applicable?(_)
-    true
+    false
   end
 end
