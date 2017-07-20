@@ -6,7 +6,12 @@ class WildflyServerView < MiddlewareResourceView
     field :bind_address
     field :product
     field :version
+    field :server_state
   end
 
   field :properties
+
+  def server_state
+    entity.properties[:server_state]
+  end
 end

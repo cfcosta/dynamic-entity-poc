@@ -71,25 +71,18 @@ RSpec.describe View do
     MultiJson.dump(val)
   end
 
-  describe '.for' do
+  describe '.for_class' do
     context 'same class' do
-      Given(:klass) { 'Mock' }
+      Given(:klass) { Mock }
 
-      Then { View.for(klass) == MockView }
-      Then { expect { View.for('foobar') }.to raise_error(ViewNotFound) }
+      Then { View.for_class(klass) == MockView }
+      Then { expect { View.for_class('foobar') }.to raise_error(ViewNotFound) }
     end
 
     context 'superclasses' do
-      Given(:klass) { 'Stub' }
+      Given(:klass) { Stub }
 
-      Then { View.for(klass) == MockView }
-    end
-
-    context 'list' do
-      Given(:list) { 'List' }
-      Given(:mock) { 'Mock' }
-
-      Then { View.for(list, mock) == [ListView, MockView] }
+      Then { View.for_class(klass) == MockView }
     end
   end
 
@@ -183,6 +176,14 @@ RSpec.describe View do
       Given(:object) { double(id: 1, full_name: 'foo', active: true, foo: 'bar') }
       Given(:view) { MockViews::FromJSON.new(object) }
       Given(:result) { json!(summary: {id: 1, isActive: true, name: 'foo'}, foo: 'bar') }
+
+      Then { view.render_json == result }
+    end
+
+    context 'hash result for field' do
+      Given(:object) { double(name: {first_name: 'foo'}) }
+      Given(:view) { MockViews::Simple.new(object) }
+      Given(:result) { json!(name: {firstName: 'foo'}) }
 
       Then { view.render_json == result }
     end

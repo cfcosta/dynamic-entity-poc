@@ -67,6 +67,10 @@ class View
                  data.public_send(field)
                end
 
+      if result.is_a?(Hash)
+        result = result.map { |(k,v)| [normalize(k), v] }.to_h
+      end
+
       { normalize(alias_name) => result }
     when ViewDSL::Pane
       rendered = field.fields
