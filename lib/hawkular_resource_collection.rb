@@ -18,7 +18,7 @@ class HawkularResourceCollection
     resources = entities - servers
 
     servers.each do |server|
-      server.properties.merge!(resources.inject({}) { |accum,el| accum.merge(el.properties)})
+      server.properties.reverse_merge!(resources.inject({}) { |accum,el| accum.merge(el.properties)})
     end
 
     entities
