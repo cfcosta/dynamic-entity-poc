@@ -3,16 +3,34 @@ require 'multi_json'
 
 module ViewImport
   def from_hash(source)
-    Class.new(View) do
-      source.each do |(k,v)|
-        case v
-        when Array
-          pane(k) { v.each { |f| field(f['name'], f['alias']) } }
-        when Hash
-          field(v['name'], v['alias'])
-        end
+    Class.new(View) { import_hash(source) }
+  end
+
+  def import_hash(source)
+    source.each do |(k,v)|
+      case v
+      when Array
+        pane(k) { v.each { |f| field(f['name'], f['alias']) } }
+      when Hash
+        field(v['name'], v['alias'])
       end
     end
+  end
+
+  def import_json(json)
+    import_hash(MultiJson.decode(json))
+  end
+
+  def import_json_file(file)
+    import_json(read_file(file))
+  end
+
+  def import_yaml(yaml)
+    import_hash(YAML.safe_load(yaml))
+  end
+
+  def import_yaml_file(file)
+    import_yaml(read_file(file))
   end
 
   def from_yaml(yaml)

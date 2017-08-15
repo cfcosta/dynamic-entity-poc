@@ -1,11 +1,5 @@
 require_dependency 'view'
 
 class MiddlewareResourceView < View
-  pane :summary do
-    field :id
-    field :name
-    field :feed
-    field :type_path
-    field :path
-  end
+  import_json_file 'lib/schemas/middleware_resource_view.json'
 end

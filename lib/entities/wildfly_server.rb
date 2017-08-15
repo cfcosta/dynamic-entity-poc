@@ -22,6 +22,10 @@ class WildflyServer < MiddlewareServer
     properties[:product_name]
   end
 
+  def server_state
+    properties[:server_state]
+  end
+
   def version
     properties[:version]
   end
