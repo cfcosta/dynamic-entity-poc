@@ -7,7 +7,7 @@ end
 
 gem 'rails'
 gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 4.3'
 
 gem 'hawkular-client'
 gem 'multi_json'
